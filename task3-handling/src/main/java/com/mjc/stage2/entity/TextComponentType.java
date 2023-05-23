@@ -5,6 +5,7 @@ public enum TextComponentType {
     WORD(""),
     SYMBOL("");
 
+
     private final String delimiter;
 
     TextComponentType(String delimiter) {
