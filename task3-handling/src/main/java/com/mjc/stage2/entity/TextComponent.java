@@ -17,7 +17,7 @@ public class TextComponent extends AbstractTextComponent{
         return
         componentList.stream()
                 .map(cmp -> cmp.operation())
-                .collect(Collectors.joining());
+                .collect(Collectors.joining(componentType.getDelimiter()));
 
     }
 

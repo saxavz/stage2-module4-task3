@@ -7,7 +7,6 @@ import com.mjc.stage2.entity.TextComponentType;
 import java.util.Arrays;
 
 public class LexemeParser extends AbstractTextParser{
-    private static final String SENTENCE_REGEX = "[!\\.?](?=\\s|$)";
     private static final String LEXEME_REGEX = "\\s+";
     private static final String WORD_REGEX = "\\w[\\w!=?():]+";
 
@@ -15,12 +14,8 @@ public class LexemeParser extends AbstractTextParser{
     @Override
     public void parse(AbstractTextComponent abstractTextComponent, String string) {
 
-        Arrays.stream(string.split(SENTENCE_REGEX))
-                .flatMap( s -> Arrays.stream(s.split(LEXEME_REGEX)))
-                .map(String::trim) //remove left/right spaces
-                .map(s -> s.replaceAll(",$","")) //remove trailing commas
-                //.filter(s -> s.length() > 0)
-                .filter(s -> s.matches(WORD_REGEX)) //push-down only expected word patterns
+        Arrays.stream(string.split(LEXEME_REGEX))
+                //.filter(s -> s.matches(WORD_REGEX)) //push-down only expected word patterns
                 .forEach( word -> abstractTextComponent.add(delegateToNext(word)));
     }
 
